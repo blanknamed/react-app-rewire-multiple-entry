@@ -4,24 +4,24 @@ import { EntryWebpack, EntryMap } from './types/entry';
 const defaultEntryName = 'main';
 
 const pwd = process.cwd();
-const appIndexes = ['js', 'tsx', 'ts', 'jsx'].map((ext) => 
-    path.resolve(pwd, `src/index.${ext}`)
+const appIndexes = ['js', 'tsx', 'ts', 'jsx'].map((ext) =>
+  path.resolve(pwd, `src/index.${ext}`)
 );
 
-export default function(entries:EntryWebpack[] | null) {
-  return function(config:any) {
+export default function (entries: EntryWebpack[] | null) {
+  return function (config: any) {
     if (!entries || !entries.length) {
       return config;
     }
     // Multiple Entry JS
-    const defaultEntryHTMLPlugin = config.plugins.filter(function(plugin:any) {
+    const defaultEntryHTMLPlugin = config.plugins.filter(function (plugin: any) {
       return plugin.constructor.name === 'HtmlWebpackPlugin';
     })[0];
     defaultEntryHTMLPlugin.options.chunks = [defaultEntryName];
-    const necessaryEntry = config.entry.filter(function(file:string) {
+    const necessaryEntry = config.entry.filter(function (file: string) {
       return !appIndexes.includes(file);
     });
-    const multipleEntry:EntryMap = {};
+    const multipleEntry: EntryMap = {};
     multipleEntry[defaultEntryName] = config.entry;
 
     entries.forEach(_entry => {

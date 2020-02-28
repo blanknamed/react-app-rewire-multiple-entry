@@ -10,7 +10,7 @@ export const formatName = function (name: string) {
   return name
     .split('/')
     .reverse()[0]
-    .match(/^[^.]*/)[0];
+    .match(/^[^.]*/)[0]
 };
 
 export const checkFileExist = function (file: string) {
