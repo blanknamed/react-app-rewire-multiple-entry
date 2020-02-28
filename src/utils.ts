@@ -7,16 +7,10 @@ export const formatName = function (name: string) {
   if (!name) {
     name = '';
   }
-  return (
-    name
-      .split('/')
-      .reverse()[0]
-      .match(/^[^.]*/)[0] +
-    '.' +
-    H.update(name)
-      .digest()
-      .toString(16)
-  );
+  return name
+    .split('/')
+    .reverse()[0]
+    .match(/^[^.]*/)[0];
 };
 
 export const checkFileExist = function (file: string) {
